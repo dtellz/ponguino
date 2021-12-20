@@ -29,6 +29,7 @@ void setup() {
   lcd.setCursor(0, 1); 
   //estamos poniendo el cursor para escribir en la segunda linea
   //de la pantalla.
+  //MASSIVE REFACTOR NEEDED HERE! its fun to see code you wrote ages ago xD
   lcd.print("PONG-uino!");
   delay(1500);
   lcd.setCursor(0,0);
