@@ -1,22 +1,21 @@
 #include <LiquidCrystal.h>
 
-//declaramos la pantalla lcd y asignamos los pines de UNOR3 con los
-//que vamos a comunicarnos con la pantalla. El pin 6 está conectado al 
-//TILT sensor por lo que no se asigna aquí.
+// declare lcd screen and assign UNOR3 pins that we will use to communicate with the screen.
+// Pin 6 is connected to the TILT sensor so its not assigned here
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-//switchPin es el pin al que está conectado el tilt switch
+//switchPin connected to tilt switch
 const int switchPin = 6;
-//swichtState marca el estado del sensor de movimiento tilt switch
+//swichtState sets the state of tilt switch sensor
 int switchState = 0;
-//prevSwitchState registra el valor previo del sensor
+//prevSwitchState registers sensor previous state
 int prevSwitchState = 0;
-//reply guarda la respuesta del programa
+//reply saves program output
 int reply;
-int puntosJugador = 0;
+int playerPoints = 0;
 int i = 0;
 int j = 0;
-int dificultad = 200;
+int ballSpeed = 200;
 
 void setup() {
   
@@ -27,8 +26,7 @@ void setup() {
 
   lcd.print("Welcome to");
   lcd.setCursor(0, 1); 
-  //estamos poniendo el cursor para escribir en la segunda linea
-  //de la pantalla.
+  // setting cursos to write in the seccond line of the screen
   //MASSIVE REFACTOR NEEDED HERE! its fun to see code you wrote ages ago xD
   lcd.print("PONG-uino!");
   delay(1500);
@@ -116,7 +114,7 @@ void setup() {
 void loop() {
 
   switchState =digitalRead(switchPin);
-  while(puntosJugador != 1){ 
+  while(playerPoints != 1){ 
 
     
     
@@ -128,20 +126,20 @@ void loop() {
       lcd.print("X");
       lcd.setCursor(15,15);
       lcd.print("X");
-      delay(dificultad);
+      delay(ballSpeed);
       lcd.clear();
       }
       if (i <15){
         lcd.clear();
         lcd.setCursor(i, 0);
         lcd.print('o');
-        delay(dificultad);
+        delay(ballSpeed);
       }else if (i == 15){
        
         switchState =digitalRead(switchPin);
         if (switchState == HIGH){
-          /*ahora la bola ha llegado al final y el boton esta pulsado por lo que debe volver en sentido contrario*/
-          puntosJugador += 1;
+          // now the ball has reached screen end and btn is pressed so it should go back
+          playerPoints += 1;
           for (i == 14; i>=0; i--) {
               switchState =digitalRead(switchPin);
               if (switchState == HIGH){
@@ -156,7 +154,7 @@ void loop() {
               lcd.clear();
               lcd.setCursor(i, 0);
               lcd.print('o');
-              delay(dificultad);
+              delay(ballSpeed);
           }
       
         }else{
@@ -165,7 +163,7 @@ void loop() {
           lcd.print("GAME OVER!");
           lcd.setCursor(3,1);
           lcd.print("Puntos:");
-          lcd.print(puntosJugador);
+          lcd.print(playerPoints);
         }
   }
 }
