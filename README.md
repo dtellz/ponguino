@@ -1,1 +1,2 @@
 # ponguino
+lcd screen needed
