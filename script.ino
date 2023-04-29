@@ -17,6 +17,12 @@ int i = 0;
 int j = 0;
 int ballSpeed = 200;
 
+void printWithDelay(int col, int row, const char* text, int waitTime) {
+  lcd.setCursor(col, row);
+  lcd.print(text);
+  delay(waitTime);
+}
+
 void setup() {
   
   lcd.begin(16, 2);
@@ -27,87 +33,21 @@ void setup() {
   lcd.print("Welcome to");
   lcd.setCursor(0, 1); 
   // setting cursos to write in the seccond line of the screen
-  //MASSIVE REFACTOR NEEDED HERE! its fun to see code you wrote ages ago xD
-  lcd.print("PONG-uino!");
-  delay(1500);
-  lcd.setCursor(0,0);
-  lcd.print("PONG-uino!      ");
-  lcd.setCursor(0,1);
-  lcd.print("the game.");
-  delay(1500);
+  printWithDelay(0, 0, "PONG-uino!", 1500);
+  printWithDelay(0, 0, "PONG-uino!      ", 0);
+  printWithDelay(0, 1, "the game.", 1500);
+  
   lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("                ");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("               b");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("              by");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("             by ");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("            by D");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("           by Di");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("          by Die");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("         by Dieg");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("        by Diego");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("       by Diego ");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("      by Diego  ");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("     by Diego   ");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("    by Diego    ");
-  delay(90);
-  lcd.setCursor(0,0);
-  lcd.print("   by Diego     ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print("  by Diego      ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print(" by Diego       ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print("by Diego        ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print("y Diego         ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print(" Diego          ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print("Diego           ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print("iego            ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print("ego             ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print("go              ");
-  delay(150);
-  lcd.setCursor(0,0);
-  lcd.print("o               ");
-  delay(500);
+  const char* animationText = "                b              by             by             by D           by Di          by Die         by Dieg        by Diego       by Diego       by Diego      by Diego     by Diego      by Diego   by Diego    by Diego     ";
+  int animationTextLength = strlen(animationText);
+  
+  for (int i = 0; i < animationTextLength - 15; i++) {
+    int delayTime = (i < animationTextLength - 31) ? 90 : 150;
+    String frame = animationText.substring(i, i + 16);
+    printWithDelay(0, 0, frame.c_str(), delayTime);
+  }
+  
+  printWithDelay(0, 0, "o               ", 500);
 
 }
 
