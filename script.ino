@@ -30,10 +30,8 @@ void setup() {
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
 
-  lcd.print("Welcome to");
-  lcd.setCursor(0, 1); 
-  // setting cursos to write in the seccond line of the screen
-  printWithDelay(0, 0, "PONG-uino!", 1500);
+  printWithDelay(0, 0, "Welcome to", 0);
+  printWithDelay(0, 1, "PONG-uino!", 1500);
   printWithDelay(0, 0, "PONG-uino!      ", 0);
   printWithDelay(0, 1, "the game.", 1500);
   
